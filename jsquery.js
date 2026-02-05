@@ -1,4 +1,10 @@
-const { $, JSQuery } = (() => {
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+export const { $, JSQuery } = (() => {
+    var _Element_instances, _Element_TriggerEvent;
     class ElementArray extends Array {
         on(e, func, s) {
             this.forEach((v) => v.on(e, func, s));
@@ -49,7 +55,7 @@ const { $, JSQuery } = (() => {
             return this;
         }
         new() {
-            const temp = new this.constructor();
+            const temp = new ElementArray();
             this.forEach((v) => temp.push(v.new()));
             return temp;
         }
@@ -59,19 +65,10 @@ const { $, JSQuery } = (() => {
             return this;
         }
     }
-
     function toArray(elt) {
         return elt instanceof NodeList || elt instanceof HTMLCollection;
     }
-
     class Element {
-        #TriggerEvent(e, func, s) {
-            if (!func) {
-                this.trigger(e);
-                return;
-            }
-            this.on(e, func, s);
-        }
         static from(elt) {
             if (elt == null) {
                 return null;
@@ -82,9 +79,10 @@ const { $, JSQuery } = (() => {
             return new this(elt);
         }
         new() {
-            return this.constructor.from(this.elt);
+            return Element.from(this.elt);
         }
         constructor(elt) {
+            _Element_instances.add(this);
             this.elt = elt;
         }
         on(e, func, s) {
@@ -110,9 +108,10 @@ const { $, JSQuery } = (() => {
         }
         props(props) {
             for (const [name, val] of Object.entries(props)) {
-                if(val === null) {
+                if (val === null) {
                     this.elt.removeAttribute(name);
-                } else {
+                }
+                else {
                     this.elt.setAttribute(name, val);
                 }
             }
@@ -122,14 +121,16 @@ const { $, JSQuery } = (() => {
             return this.elt.getAttribute(name);
         }
         id(val) {
-            if (val == undefined) return this.getProp("id");
+            if (val == undefined)
+                return this.getProp("id");
             this.props({ id: val });
             return this;
         }
         class(names) {
             if (Array.isArray(names)) {
                 names.forEach((name) => this.elt.classList.add(name));
-            } else {
+            }
+            else {
                 this.elt.classList.add(names);
             }
             return this;
@@ -137,7 +138,8 @@ const { $, JSQuery } = (() => {
         removeClass(names) {
             if (Array.isArray(names)) {
                 names.forEach((name) => this.elt.classList.remove(name));
-            } else {
+            }
+            else {
                 this.elt.classList.remove(names);
             }
             return this;
@@ -145,7 +147,8 @@ const { $, JSQuery } = (() => {
         toggleClass(names) {
             if (Array.isArray(names)) {
                 names.forEach((name) => this.elt.classList.toggle(name));
-            } else {
+            }
+            else {
                 this.elt.classList.toggle(names);
             }
             return this;
@@ -165,7 +168,8 @@ const { $, JSQuery } = (() => {
         child(children) {
             if (Array.isArray(children)) {
                 children.forEach((child) => this.elt.appendChild(toElt(child)));
-            } else {
+            }
+            else {
                 this.elt.appendChild(toElt(children));
             }
             return this;
@@ -175,15 +179,17 @@ const { $, JSQuery } = (() => {
             return this;
         }
         get children() {
-            return this.constructor.from(this.elt.children);
+            return Element.from(this.elt.children);
         }
         html(val) {
-            if (val == undefined) return this.elt.innerHTML;
+            if (val == undefined)
+                return this.elt.innerHTML;
             this.elt.innerHTML = val;
             return this;
         }
         text(val) {
-            if (val == undefined) return this.elt.textContent;
+            if (val == undefined)
+                return this.elt.textContent;
             this.elt.textContent = val;
             return this;
         }
@@ -191,33 +197,39 @@ const { $, JSQuery } = (() => {
             return this.elt.getBoundingClientRect().toJSON();
         }
         value(val) {
-            if (val == undefined) return this.elt.value;
-            this.elt.value = val;
+            if (val == undefined)
+                return this.getProp("value");
+            this.props({ value: val });
             return this;
         }
         checked(val) {
-            if (val == undefined) return this.elt.checked;
-            this.elt.checked = val;
+            if (val == undefined)
+                return this.getProp("checked") !== null;
+            this.props({ checked: val ? "" : null });
             return this;
         }
         //events
         click(func, s) {
-            this.#TriggerEvent("click", func, s);
+            __classPrivateFieldGet(this, _Element_instances, "m", _Element_TriggerEvent).call(this, "click", func, s);
             return this;
         }
     }
-
+    _Element_instances = new WeakSet(), _Element_TriggerEvent = function _Element_TriggerEvent(e, func, s) {
+        if (!func) {
+            this.trigger(e);
+            return;
+        }
+        this.on(e, func, s);
+    };
     function toElt(elt) {
-        if (elt instanceof Element) return elt.elt;
+        if (elt instanceof Element)
+            return elt.elt;
         return elt;
     }
-
     class Extension {
         constructor() {
             if (this.constructor === Extension) {
-                throw new Error(
-                    "you can't make an instance of class: JSQuery.Extension"
-                );
+                throw new Error("you can't make an instance of class: JSQuery.Extension");
             }
         }
         get() {
@@ -239,53 +251,46 @@ const { $, JSQuery } = (() => {
         ElementArray() {
             return {};
         }
-
         static_Element() {
             return {};
         }
         static_ElementArray() {
             return {};
         }
-
         JSQuery() {
             return {};
         }
     }
-
     function J(q) {
         return Element.from(document.querySelector(q));
     }
-
     J.from = (elt) => {
         return Element.from(elt);
     };
-
     J.all = (q) => {
         return Element.from(document.querySelectorAll(q));
     };
-
     let head;
     J.head = () => {
-        if (!head) head = Element.from(document.head);
+        if (!head)
+            head = Element.from(document.head);
         return head;
     };
-
     let body;
     J.body = () => {
-        if (!body) body = Element.from(document.body);
+        if (!body)
+            body = Element.from(document.body);
         return body;
     };
-
     let doc;
     J.doc = () => {
-        if (!doc) doc = Element.from(document);
+        if (!doc)
+            doc = Element.from(document);
         return doc;
     };
-
     J.create = (t) => {
         return Element.from(document.createElement(t));
     };
-
     const JSQuery = {
         Element,
         ElementArray,
@@ -311,12 +316,9 @@ const { $, JSQuery } = (() => {
             }
         },
     };
-
     J.loadExtension = (extend) => {
         if (Object.getPrototypeOf(extend) !== Extension) {
-            throw new Error(
-                "the class is not a child of JSQuery.Extension or the inputed class is an instance"
-            );
+            throw new Error("the class is not a child of JSQuery.Extension or the inputed class is an instance");
         }
         body = undefined;
         head = undefined;
@@ -327,10 +329,7 @@ const { $, JSQuery } = (() => {
         Object.assign(ElementArray.prototype, items.ElementArray);
         Object.assign(Element, items.static_Element);
         Object.assign(ElementArray, items.static_ElementArray);
-    }
-
+    };
     J.loadPlugin = J.loadExtension;
-
     return { $: J, JSQuery };
 })();
-

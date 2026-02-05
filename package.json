@@ -1,0 +1,23 @@
+{
+  "name": "jsquery_node",
+  "version": "1.0.0",
+  "description": "jsquery",
+  "homepage": "https://github.com/chickencuber/jsquery_node#readme",
+  "bugs": {
+    "url": "https://github.com/chickencuber/jsquery_node/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chickencuber/jsquery_node.git"
+  },
+  "license": "MIT",
+  "author": "chickencuber",
+  "type": "commonjs",
+  "main": "jsquery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
