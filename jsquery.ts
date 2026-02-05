@@ -13,8 +13,10 @@ export const { $, JSQuery } = (() => {
         is(q:string) {
             return this.map((v) => v.is(q));
         }
+        checked(): boolean[];
+        checked(val: boolean): this;
         checked(val?: boolean): this | boolean[] {
-            if (val) {
+            if (val !== undefined) {
                 this.forEach((v) => v.checked(val));
                 return this;
             }
@@ -66,7 +68,7 @@ export const { $, JSQuery } = (() => {
 
     class Element {
         elt: HTMLElement;
-        #TriggerEvent(e: any, func: (this:HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions) {
+        #TriggerEvent(e: any, func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
             if (!func) {
                 this.trigger(e);
                 return;
@@ -88,11 +90,11 @@ export const { $, JSQuery } = (() => {
         constructor(elt:HTMLElement) {
             this.elt = elt;
         }
-        on(e: any, func: (this:HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions) {
+        on(e: any, func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
             this.elt.addEventListener(e, func, s);
             return this;
         }
-        removeEvent(e: any, func: (this:HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions) {
+        removeEvent(e: any, func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
             this.elt.removeEventListener(e, func, s);
             return this;
         }
@@ -122,7 +124,9 @@ export const { $, JSQuery } = (() => {
         getProp(name: string) {
             return this.elt.getAttribute(name);
         }
-        id(val: string | undefined): string | this {
+        id(): string;
+        id(val: string): this;
+        id(val?: string): string | this {
             if (val == undefined) return this.getProp("id");
             this.props({ id: val });
             return this;
@@ -154,11 +158,11 @@ export const { $, JSQuery } = (() => {
         hasClass(name: string) {
             return this.elt.classList.contains(name);
         }
-        $(q: any) {
-            return J.from(this.elt.querySelector(q));
+        $(q: any): Element {
+            return J.from(this.elt.querySelector(q)) as any;
         }
-        all(q: any) {
-            return J.from(this.elt.querySelectorAll(q));
+        all(q: any): ElementArray {
+            return J.from(this.elt.querySelectorAll(q)) as any;
         }
         is(q:string) {
             return this.elt.matches(q);
@@ -178,11 +182,15 @@ export const { $, JSQuery } = (() => {
         get children() {
             return Element.from(this.elt.children);
         }
+        html(): string;
+        html(val: string): this;
         html(val?:string): string|this {
             if (val == undefined) return this.elt.innerHTML;
             this.elt.innerHTML = val;
             return this;
         }
+        text(): string;
+        text(val: string): this;
         text(val?: string): string | this {
             if (val == undefined) return this.elt.textContent;
             this.elt.textContent = val;
@@ -191,18 +199,22 @@ export const { $, JSQuery } = (() => {
         rect() {
             return this.elt.getBoundingClientRect().toJSON();
         }
-        value(val?: string | undefined): string | this {
+        value(): string;
+        value(val: string): this;
+        value(val?: string): string | this {
             if (val == undefined) return this.getProp("value");
             this.props({value: val});
             return this;
         }
+        checked(): boolean;
+        checked(val: boolean): this;
         checked(val?: boolean): boolean| this {
             if (val == undefined) return this.getProp("checked") !== null;
             this.props({checked: val? "": null});
             return this;
         }
         //events
-        click(func: (this:HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions) {
+        click(func?: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
             this.#TriggerEvent("click", func, s);
             return this;
         }
@@ -253,16 +265,16 @@ export const { $, JSQuery } = (() => {
         }
     }
 
-    function J(q: any) {
-        return Element.from(document.querySelector(q));
+    function J(q: any): Element {
+        return Element.from(document.querySelector(q)) as any;
     }
 
     J.from = (elt: HTMLElement | NodeList | HTMLCollection) => {
         return Element.from(elt);
     };
 
-    J.all = (q: any) => {
-        return Element.from(document.querySelectorAll(q));
+    J.all = (q: any): ElementArray => {
+        return Element.from(document.querySelectorAll(q)) as any;
     };
 
     let head: Element;
@@ -283,8 +295,8 @@ export const { $, JSQuery } = (() => {
         return doc;
     };
 
-    J.create = (t: any) => {
-        return Element.from(document.createElement(t));
+    J.create = (t: any): Element => {
+        return Element.from(document.createElement(t)) as any;
     };
 
     const JSQuery = {

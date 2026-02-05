@@ -20,7 +20,7 @@ export const { $, JSQuery } = (() => {
             return this.map((v) => v.is(q));
         }
         checked(val) {
-            if (val) {
+            if (val !== undefined) {
                 this.forEach((v) => v.checked(val));
                 return this;
             }
