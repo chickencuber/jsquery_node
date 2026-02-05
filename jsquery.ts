@@ -50,7 +50,7 @@ export const { $, JSQuery } = (() => {
         }
         new() {
             const temp = new ElementArray();
-            this.forEach((v) => temp.push(v.new()));
+            this.forEach((v) => temp.push(v.new() as any));
             return temp;
         }
         //events
@@ -73,12 +73,12 @@ export const { $, JSQuery } = (() => {
             }
             this.on(e, func, s);
         }
-        static from(elt: HTMLElement | NodeList | HTMLCollection) {
+        static from(elt: HTMLElement | NodeList | HTMLCollection): Element | ElementArray {
             if (elt == null) {
                 return null;
             }
             if (toArray(elt)) {
-                return ElementArray.from(elt).map((v) => new this(v as HTMLElement));
+                return ElementArray.from(elt).map((v) => new this(v as HTMLElement)) as ElementArray;
             }
             return new this(elt);
         }
@@ -334,3 +334,8 @@ export const { $, JSQuery } = (() => {
 
     return { $: J, JSQuery };
 })();
+
+export type ElementArray = typeof JSQuery.ElementArray;
+export type Element = typeof JSQuery.ElementArray;
+export type Extension = typeof JSQuery.Extension;
+export type Plugin = typeof JSQuery.Extension;
