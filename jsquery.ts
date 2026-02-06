@@ -160,7 +160,7 @@ export const { $, JSQuery } = (() => {
         hasClass(name: string) {
             return this.elt.classList.contains(name);
         }
-        $(q: any): Element {
+        $(q: any): Element|null {
             return J.from(this.elt.querySelector(q)) as any;
         }
         all(q: any): ElementArray {
