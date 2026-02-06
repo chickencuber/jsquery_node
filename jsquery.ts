@@ -271,7 +271,9 @@ export const { $, JSQuery } = (() => {
         return Element.from(document.querySelector(q)) as any;
     }
     
-    J.from = Element.from;
+    J.from = ((elt:any) => {
+        return Element.from(elt);
+    }) as typeof Element.from;
 
     J.all = (q: any): ElementArray => {
         return Element.from(document.querySelectorAll(q)) as any;

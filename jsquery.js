@@ -264,7 +264,9 @@ export const { $, JSQuery } = (() => {
     function J(q) {
         return Element.from(document.querySelector(q));
     }
-    J.from = Element.from;
+    J.from = ((elt) => {
+        return Element.from(elt);
+    });
     J.all = (q) => {
         return Element.from(document.querySelectorAll(q));
     };
