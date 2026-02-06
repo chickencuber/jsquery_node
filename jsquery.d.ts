@@ -18,7 +18,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -130,7 +130,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -231,7 +231,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -343,7 +343,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -455,7 +455,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -556,7 +556,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -664,7 +664,7 @@ export declare const $: {
         toggleClass(names: string | string[]): any;
         remove(): any;
         "new"(): any;
-        click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+        click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
         length: number;
         toString(): string;
         toLocaleString(): string;
@@ -795,7 +795,7 @@ export declare const $: {
         toggleClass(names: string | string[]): any;
         remove(): any;
         "new"(): any;
-        click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+        click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
         length: number;
         toString(): string;
         toLocaleString(): string;
@@ -3404,7 +3404,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -3516,7 +3516,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -3617,7 +3617,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -3729,7 +3729,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -3841,7 +3841,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -3942,7 +3942,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4054,7 +4054,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4166,7 +4166,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4267,7 +4267,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4379,7 +4379,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4491,7 +4491,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4592,7 +4592,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -4738,7 +4738,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -4850,7 +4850,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -4951,7 +4951,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -5063,7 +5063,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -5175,7 +5175,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -5276,7 +5276,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -5384,7 +5384,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -5517,7 +5517,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;
@@ -8126,7 +8126,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -8238,7 +8238,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -8339,7 +8339,7 @@ export declare const $: {
                 toggleClass(names: string | string[]): any;
                 remove(): any;
                 "new"(): any;
-                click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+                click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
                 length: number;
                 toString(): string;
                 toLocaleString(): string;
@@ -8447,7 +8447,7 @@ export declare const $: {
             toggleClass(names: string | string[]): any;
             remove(): any;
             "new"(): any;
-            click(func: (this: HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions): any;
+            click(func: (this: HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions): any;
             length: number;
             toString(): string;
             toLocaleString(): string;

@@ -56,7 +56,7 @@ export const { $, JSQuery } = (() => {
             return temp;
         }
         //events
-        click(func: (this:HTMLElement, ev: any) => any, s: boolean | AddEventListenerOptions) {
+        click(func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
             this.forEach((v) => v.click(func, s));
             return this;
         }
