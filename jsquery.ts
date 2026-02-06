@@ -75,7 +75,9 @@ export const { $, JSQuery } = (() => {
             }
             this.on(e, func, s);
         }
-        static from(elt: HTMLElement | NodeList | HTMLCollection): Element | ElementArray {
+        static from(elt: HTMLElement): Element|null;
+        static from(elt: NodeList|HTMLCollection): ElementArray;
+        static from(elt: HTMLElement | NodeList | HTMLCollection): Element | ElementArray | null {
             if (elt == null) {
                 return null;
             }
@@ -265,13 +267,11 @@ export const { $, JSQuery } = (() => {
         }
     }
 
-    function J(q: any): Element {
+    function J(q: any): Element | null {
         return Element.from(document.querySelector(q)) as any;
     }
-
-    J.from = (elt: HTMLElement | NodeList | HTMLCollection) => {
-        return Element.from(elt);
-    };
+    
+    J.from = Element.from;
 
     J.all = (q: any): ElementArray => {
         return Element.from(document.querySelectorAll(q)) as any;
@@ -348,6 +348,7 @@ export const { $, JSQuery } = (() => {
 })();
 
 export type ElementArray = typeof JSQuery.ElementArray;
-export type Element = typeof JSQuery.ElementArray;
+export type Element = typeof JSQuery.Element;
 export type Extension = typeof JSQuery.Extension;
 export type Plugin = typeof JSQuery.Extension;
+
