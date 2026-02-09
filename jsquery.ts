@@ -204,8 +204,8 @@ export const { $, JSQuery } = (() => {
         value(): string;
         value(val: string): this;
         value(val?: string): string | this {
-            if (val == undefined) return this.getProp("value");
-            this.props({value: val});
+            if (val == undefined) return (this.elt as any).value;
+            (this.elt as any).value = val;
             return this;
         }
         checked(): boolean;
