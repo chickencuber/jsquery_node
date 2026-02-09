@@ -204,8 +204,8 @@ export const { $, JSQuery } = (() => {
         }
         checked(val) {
             if (val == undefined)
-                return this.checked;
-            this.checked = val;
+                return this.elt.checked;
+            this.elt.checked = val;
             return this;
         }
         //events
