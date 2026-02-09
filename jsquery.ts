@@ -211,8 +211,8 @@ export const { $, JSQuery } = (() => {
         checked(): boolean;
         checked(val: boolean): this;
         checked(val?: boolean): boolean| this {
-            if (val == undefined) return this.getProp("checked") !== null;
-            this.props({checked: val? "": null});
+            if (val == undefined) return (this as any).checked;
+            (this as any).checked = val;
             return this;
         }
         //events
