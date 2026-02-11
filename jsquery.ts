@@ -1,72 +1,51 @@
-export const { $, JSQuery } = (() => {
-    class ElementArray extends Array<Element> {
-        on<K extends keyof DocumentEventMap>(e: K, func: (this: HTMLElement, ev: DocumentEventMap[K])=>any, s?: boolean | AddEventListenerOptions) {
-            this.forEach((v) => v.on(e, func, s));
-            return this;
-        }
-        rect() {
-            return this.map((v) => v.rect());
-        }
-        hasClass(c:string) {
-            return this.map((v) => v.hasClass(c));
-        }
-        is(q:string) {
-            return this.map((v) => v.is(q));
-        }
-        checked(): boolean[];
-        checked(val: boolean): this;
-        checked(val?: boolean): this | boolean[] {
-            if (val !== undefined) {
-                this.forEach((v) => v.checked(val));
-                return this;
-            }
-            return this.map((v) => v.checked()) as any;
-        }
-        trigger(e: any) {
-            this.forEach((v) => v.trigger(e));
-            return this;
-        }
-        css(styles: Record<string, any>) {
-            this.forEach((v) => v.css(styles));
-            return this;
-        }
-        props(props: Record<string, any>) {
-            this.forEach((v) => v.props(props));
-            return this;
-        }
-        class(names: string | string[]) {
-            this.forEach((v) => v.class(names));
-            return this;
-        }
-        removeClass(names: string | string[]) {
-            this.forEach((v) => v.removeClass(names));
-            return this;
-        }
-        toggleClass(names: string | string[]) {
-            this.forEach((v) => v.toggleClass(names));
-            return this;
-        }
-        remove() {
-            this.forEach((v) => v.remove());
-            return this;
-        }
-        new() {
-            const temp = new ElementArray();
-            this.forEach((v) => temp.push(v.new() as any));
-            return temp;
-        }
-        //events
-        click(func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
-            this.forEach((v) => v.click(func, s));
-            return this;
-        }
-    }
-
+export namespace JSQuery {
     function toArray(elt: NodeList | HTMLCollection | HTMLElement) {
         return elt instanceof NodeList || elt instanceof HTMLCollection;
     }
+    function toElt(elt: Element): HTMLElement {
+        if (elt instanceof Element) return elt.elt;
+        return elt;
+    }
+    export class Extension {
+        constructor() {
+            if (this.constructor === Extension) {
+                throw new Error(
+                    "you can't make an instance of class: JSQuery.Extension"
+                );
+            }
+        }
+        get() {
+            return {
+                $: this.$(),
+                Element: this.Element(),
+                static_Element: this.static_Element(),
+                static_ElementArray: this.static_ElementArray(),
+                ElementArray: this.ElementArray(),
+                JSQuery: this.JSQuery(),
+            };
+        }
+        $() {
+            return {};
+        }
+        Element() {
+            return {};
+        }
+        ElementArray() {
+            return {};
+        }
 
-    class Element {
+        static_Element() {
+            return {};
+        }
+        static_ElementArray() {
+            return {};
+        }
+
+        JSQuery() {
+            return {};
+        }
+    }
+    export class Element {
         elt: HTMLElement;
         #TriggerEvent(e: any, func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
             if (!func) {
@@ -221,136 +200,141 @@ export const { $, JSQuery } = (() => {
             return this;
         }
     }
-
-    function toElt(elt: Element): HTMLElement {
-        if (elt instanceof Element) return elt.elt;
-        return elt;
-    }
-
-    class Extension {
-        constructor() {
-            if (this.constructor === Extension) {
-                throw new Error(
-                    "you can't make an instance of class: JSQuery.Extension"
-                );
-            }
-        }
-        get() {
+    export class Caching extends Extension {
+        $() {
             return {
-                $: this.$(),
-                Element: this.Element(),
-                static_Element: this.static_Element(),
-                static_ElementArray: this.static_ElementArray(),
-                ElementArray: this.ElementArray(),
-                JSQuery: this.JSQuery(),
+                cache<T extends (...args:any[])=>any>(func: T): T {
+                    const f = (...args: Parameters<T>): ReturnType<T> => {
+                        const val = JSON.stringify(args);
+                        if (f.cache.hasOwnProperty(val)) {
+                            return f.cache[val];
+                        }
+                        const temp = func(...args);
+                        f.cache[val] = temp;
+                        return temp;
+                    };
+                    f.cache = {};
+                    return f as any;
+                },
             };
         }
-        $() {
-            return {};
-        }
-        Element() {
-            return {};
-        }
-        ElementArray() {
-            return {};
-        }
-
-        static_Element() {
-            return {};
-        }
-        static_ElementArray() {
-            return {};
-        }
-
-        JSQuery() {
-            return {};
-        }
     }
-
-    function J(q: any): Element | null {
-        return Element.from(document.querySelector(q)) as any;
-    }
-    
-    J.from = ((elt:any) => {
-        return Element.from(elt);
-    }) as typeof Element.from;
-
-    J.all = (q: any): ElementArray => {
-        return Element.from(document.querySelectorAll(q)) as any;
-    };
-
-    let head: Element;
-    J.head = () => {
-        if (!head) head = Element.from(document.head) as Element;
-        return head;
-    };
-
-    let body: Element;
-    J.body = () => {
-        if (!body) body = Element.from(document.body) as Element;
-        return body;
-    };
-
-    let doc: Element;
-    J.doc = () => {
-        if (!doc) doc = Element.from(document as any) as Element;
-        return doc;
-    };
-
-    J.create = (t: any): Element => {
-        return Element.from(document.createElement(t)) as any;
-    };
-
-    const JSQuery = {
-        Element,
-        ElementArray,
-        Extension,
-        Plugin: Extension,
-        Caching: class Caching extends Extension {
-            $() {
-                return {
-                    cache<T extends (...args:any[])=>any>(func: T): T {
-                        const f = (...args: Parameters<T>): ReturnType<T> => {
-                            const val = JSON.stringify(args);
-                            if (f.cache.hasOwnProperty(val)) {
-                                return f.cache[val];
-                            }
-                            const temp = func(...args);
-                            f.cache[val] = temp;
-                            return temp;
-                        };
-                        f.cache = {};
-                        return f as any;
-                    },
-                };
+    export class ElementArray extends Array<Element> {
+        on<K extends keyof DocumentEventMap>(e: K, func: (this: HTMLElement, ev: DocumentEventMap[K])=>any, s?: boolean | AddEventListenerOptions) {
+            this.forEach((v) => v.on(e, func, s));
+            return this;
+        }
+        rect() {
+            return this.map((v) => v.rect());
+        }
+        hasClass(c:string) {
+            return this.map((v) => v.hasClass(c));
+        }
+        is(q:string) {
+            return this.map((v) => v.is(q));
+        }
+        checked(): boolean[];
+        checked(val: boolean): this;
+        checked(val?: boolean): this | boolean[] {
+            if (val !== undefined) {
+                this.forEach((v) => v.checked(val));
+                return this;
             }
-        },
-    };
-
-    J.loadExtension = (extend: new()=>Extension) => {
-        if (Object.getPrototypeOf(extend) !== Extension) {
-            throw new Error(
-                "the class is not a child of JSQuery.Extension or the inputed class is an instance"
-            );
+            return this.map((v) => v.checked()) as any;
         }
-        body = undefined;
-        head = undefined;
-        const items = new extend().get();
-        Object.assign(J, items.$);
-        Object.assign(JSQuery, items.JSQuery);
-        Object.assign(Element.prototype, items.Element);
-        Object.assign(ElementArray.prototype, items.ElementArray);
-        Object.assign(Element, items.static_Element);
-        Object.assign(ElementArray, items.static_ElementArray);
+        trigger(e: any) {
+            this.forEach((v) => v.trigger(e));
+            return this;
+        }
+        css(styles: Record<string, any>) {
+            this.forEach((v) => v.css(styles));
+            return this;
+        }
+        props(props: Record<string, any>) {
+            this.forEach((v) => v.props(props));
+            return this;
+        }
+        class(names: string | string[]) {
+            this.forEach((v) => v.class(names));
+            return this;
+        }
+        removeClass(names: string | string[]) {
+            this.forEach((v) => v.removeClass(names));
+            return this;
+        }
+        toggleClass(names: string | string[]) {
+            this.forEach((v) => v.toggleClass(names));
+            return this;
+        }
+        remove() {
+            this.forEach((v) => v.remove());
+            return this;
+        }
+        new() {
+            const temp = new ElementArray();
+            this.forEach((v) => temp.push(v.new() as any));
+            return temp;
+        }
+        //events
+        click(func: (this:HTMLElement, ev: any) => any, s?: boolean | AddEventListenerOptions) {
+            this.forEach((v) => v.click(func, s));
+            return this;
+        }
     }
+    export const Plugin = Extension;
+    export type Plugin = Extension;
+}
 
-    J.loadPlugin = J.loadExtension;
+function J(q: any): JSQuery.Element | null {
+    return JSQuery.Element.from(document.querySelector(q)) as any;
+}
 
-    return { $: J, JSQuery };
-})();
+J.from = ((elt:any) => {
+    return JSQuery.Element.from(elt);
+}) as typeof JSQuery.Element.from;
 
-export type ElementArray = typeof JSQuery.ElementArray;
-export type Element = typeof JSQuery.Element;
-export type Extension = typeof JSQuery.Extension;
-export type Plugin = typeof JSQuery.Extension;
+J.all = (q: any): JSQuery.ElementArray => {
+    return JSQuery.Element.from(document.querySelectorAll(q)) as any;
+};
+
+let head: JSQuery.Element;
+J.head = () => {
+    if (!head) head = JSQuery.Element.from(document.head) as JSQuery.Element;
+    return head;
+};
+
+let body: JSQuery.Element;
+J.body = () => {
+    if (!body) body = JSQuery.Element.from(document.body) as JSQuery.Element;
+    return body;
+};
+
+let doc: JSQuery.Element;
+J.doc = () => {
+    if (!doc) doc = JSQuery.Element.from(document as any) as JSQuery.Element;
+    return doc;
+};
+
+J.create = (t: any): JSQuery.Element => {
+    return JSQuery.Element.from(document.createElement(t)) as any;
+};
+
+J.loadExtension = (extend: new()=>JSQuery.Extension) => {
+    if (Object.getPrototypeOf(extend) !== JSQuery.Extension) {
+        throw new Error(
+            "the class is not a child of JSQuery.Extension or the inputed class is an instance"
+        );
+    }
+    body = undefined;
+    head = undefined;
+    const items = new extend().get();
+    Object.assign(J, items.$);
+    Object.assign(JSQuery, items.JSQuery);
+    Object.assign(JSQuery.Element.prototype, items.Element);
+    Object.assign(JSQuery.ElementArray.prototype, items.ElementArray);
+    Object.assign(JSQuery.Element, items.static_Element);
+    Object.assign(JSQuery.ElementArray, items.static_ElementArray);
+}
+
+J.loadPlugin = J.loadExtension;
 
