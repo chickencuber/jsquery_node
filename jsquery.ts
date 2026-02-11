@@ -285,9 +285,10 @@ export namespace JSQuery {
     export type Plugin = Extension;
 }
 
+
 function J(q: any): JSQuery.Element | null {
     return JSQuery.Element.from(document.querySelector(q)) as any;
-}
+};
 
 J.from = ((elt:any) => {
     return JSQuery.Element.from(elt);
@@ -337,4 +338,5 @@ J.loadExtension = (extend: new()=>JSQuery.Extension) => {
 }
 
 J.loadPlugin = J.loadExtension;
+export const $ = J;
 
