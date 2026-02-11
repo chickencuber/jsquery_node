@@ -2,6 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "module": "esnext",
-    "target": "es2020"
+    "target": "es2020",
+    "allowImportingTsExtensions": true
   }
 }
