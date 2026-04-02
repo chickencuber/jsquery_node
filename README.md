@@ -1,2 +1,2 @@
 a clone on jquery
-https://cdn.jsdelivr.net/gh/chickencuber/jsquery@latest/jsquery.js
+<<https://cdn.jsdelivr.net/npm/jsquery_node@latest/jsquery.bundle.js>>
