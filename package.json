@@ -1,6 +1,6 @@
 {
   "name": "jsquery_node",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "jsquery",
   "homepage": "https://github.com/chickencuber/jsquery_node#readme",
   "bugs": {
@@ -18,6 +18,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "esbuild": "^0.27.5",
     "typescript": "^5.9.3"
   }
 }
